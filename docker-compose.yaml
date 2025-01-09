@@ -1,15 +1,39 @@
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql_container
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: dev_db
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
     ports:
-      - "3306:3306"
+      - "5432:5432"  # Mapea el puerto 5432 del contenedor al puerto 5432 del host
+    environment:
+      POSTGRES_USER: root       # Cambia 'your_user' por tu nombre de usuario
+      POSTGRES_PASSWORD: root123 # Cambia 'your_password' por tu contraseña
+      POSTGRES_DB: taller3backend     # Cambia 'your_database' por el nombre de tu base de datos
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data # Persistencia de datos
+
+  backend:
+    container_name: backend_container
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      DB_HOST: postgres-container
+      DB_USER: root
+      DB_DATABASE: taller3backend
+      DB_PASSWORD: root123
+      TOKEN_SECRET: 9428uywfjkamzc2e9u3oji0d89ashibj
+      DB_PORT: 5432
+    depends_on:
+      - postgres
+    networks:
+      - taller3-network
 
 volumes:
-  mysql_data:
+  postgres_data:
+    driver: local
+
+networks:
+  taller3-network:
+    driver: bridge
