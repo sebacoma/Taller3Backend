@@ -22,6 +22,12 @@ const sequelize = new Sequelize(
       backoffBase: 5000,
       backoffExponent: 1.5,
     },
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    }
   }
 );
 
