@@ -1,16 +1,4 @@
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres-container
-    ports:
-      - "5432:5432"  # Mapea el puerto 5432 del contenedor al puerto 5432 del host
-    environment:
-      POSTGRES_USER: root       # Cambia 'your_user' por tu nombre de usuario
-      POSTGRES_PASSWORD: root123 # Cambia 'your_password' por tu contraseña
-      POSTGRES_DB: taller3backend     # Cambia 'your_database' por el nombre de tu base de datos
-    volumes:
-      - postgres_data:/var/lib/postgresql/data # Persistencia de datos
-
   backend:
     container_name: backend_container
     build:
@@ -19,21 +7,14 @@ services:
     ports:
       - "4000:4000"
     environment:
-      DB_HOST: postgres-container
-      DB_USER: root
-      DB_DATABASE: taller3backend
-      DB_PASSWORD: root123
-      TOKEN_SECRET: 9428uywfjkamzc2e9u3oji0d89ashibj
+      DB_HOST: dpg-ctvhkdd2ng1s73d54gcg-a.oregon-postgres.render.com
       DB_PORT: 5432
-    depends_on:
-      - postgres
+      DB_DATABASE: taller3backend
+      DB_USER: root
+      DB_PASSWORD: 6MmHbSFZUTuNgFmZSbQS9DRI0qQRn8yx
+      TOKEN_SECRET: mysecretkey
     networks:
       - taller3-network
-
-volumes:
-  postgres_data:
-    driver: local
-
 networks:
   taller3-network:
     driver: bridge
