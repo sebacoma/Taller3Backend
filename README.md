@@ -1,34 +1,67 @@
-Before anything, you must have installed [NodeJS 18.18.0](https://nodejs.org/es) and [MySQL Workbench 8.1.0](https://dev.mysql.com/downloads/mysql/) in your device, also you have to install the sequelize´s CLI, to do this
-you have to execute the following commands in the  BASH command console:
-```bash
-	npm install -g sequelize-cli
+# Taller 3 Backend
+
+Este proyecto es el backend desarrollado para el Taller 3. Utiliza Node.js, Express, y MySQL, y está diseñado para desplegarse utilizando Docker y Render.
+
+## Tecnologías utilizadas
+
+- **Node.js**: Entorno de ejecución para JavaScript.
+- **Express**: Framework para construir APIs REST.
+- **MySQL**: Base de datos relacional.
+- **Docker**: Para crear y manejar contenedores.
+- **Render**: Servicio para desplegar tanto la base de datos como el backend.
+- **GitHub Actions**: Automatización del flujo de CI/CD.
+
+## Características principales
+
+- CRUD de datos.
+- Conexión con una base de datos MySQL en Render.
+- Despliegue automatizado usando Docker y GitHub Actions.
+
+
+
+## Requisitos previos
+
+Asegúrate de tener instalados los siguientes programas antes de comenzar:
+
+- [Node.js](https://nodejs.org/)
+- [Docker](https://www.docker.com/)
+- [MySQL](https://www.mysql.com/)
+- [Git](https://git-scm.com/)
+
+## Instalación y configuración
+
+1. Clona el repositorio:
+   git clone https://github.com/sebacoma/Taller3Backend.git
+   cd Taller3Backend
+
+2. Instala las dependencias: 
 	npm install
-```
-Database
 
-to execute the migrations and seeders you must modified the name of the file  .env.example to .env, then modified the password section with your password from workbench.
-Also add a variable that define the secret key for the token.
+3. Configura las variables de entorno en un archivo .env:
+	DB_HOST=your-database-host
+	DB_USER=your-database-user
+	DB_PASSWORD=your-database-password
+	DB_NAME=your-database-name
 
-```bash
-	DB_HOST=localhost
-	DB_DATABASE=nombre_base_de_datos  //name of the database in workbench
-	DB_USER=root
-	DB_PASSWORD= //here goes the password
-    TOKEN_SECRET=mysecretkey
-```
+4. Inicia el servidor localmente:
+	npm start
 
-Finally in the bash console, execute the following commands:
+## Uso con Docker
+1. Construye la imagen de Docker:
+	docker build -t taller3-backend .
 
-```bash
-	sequelize db:create
-	sequelize db:migrate
-	sequelize db:seed:all
-```
+2. Ejecuta el contenedor:
+	docker run -p 3000:3000 --env-file .env taller3-backend
 
-Now you can run the project with following command in the bash console
+3. Alternativamente, usa docker-compose:
+	docker-compose up
 
-```bash
-	npm run dev
-```
+## Despliegue
+El proyecto está configurado para desplegarse automáticamente en Render al hacer un push a la rama main.
 
-PROBANDO
+Flujo de CI/CD con GitHub Actions
+El archivo deploy.yml se encuentra en .github/workflows y realiza los siguientes pasos:
+
+1. Construcción de la imagen de Docker.
+2. Push de la imagen a Docker Hub.
+3. Notificación a Render para redeployar el servicio.
