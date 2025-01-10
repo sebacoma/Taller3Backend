@@ -38,16 +38,16 @@ Asegúrate de tener instalados los siguientes programas antes de comenzar:
 	npm install
 
 3. Configura las variables de entorno en un archivo .env:
-	DB_HOST=your-database-host
-	DB_USER=your-database-user
-	DB_PASSWORD=your-database-password
-	DB_NAME=your-database-name
+	- DB_HOST=your-database-host
+	- DB_USER=your-database-user
+	- DB_PASSWORD=your-database-password
+	- DB_NAME=your-database-name
 
 4. probar conexion con base de datos
 
-	sequelize db:create
-	sequelize db: migrate
-	sequelize db:sedd:all
+	- sequelize db:create
+	- sequelize db: migrate
+	- sequelize db:sedd:all
 
 
 5. Inicia el servidor localmente:
@@ -55,13 +55,13 @@ Asegúrate de tener instalados los siguientes programas antes de comenzar:
 
 ## Uso con Docker
 1. Construye la imagen de Docker:
-	docker build -t taller3-backend .
+	- docker build -t taller3-backend .
 
 2. Ejecuta el contenedor:
-	docker run -p 3000:3000 --env-file .env taller3-backend
+	- docker run -p 3000:3000 --env-file .env taller3-backend
 
 3. Alternativamente, usa docker-compose:
-	docker-compose up
+	- docker-compose up
 
 ## Despliegue
 El proyecto está configurado para desplegarse automáticamente en Render al hacer un push a la rama main.
