@@ -25,6 +25,10 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.urlencoded({ extended: false }));
 // Configura bodyParser para parsear JSON
 app.use(bodyParser.json());
+app.use(cors({
+    origin: 'https://taller3frontend2025.web.app'  // Replace this URL with the URL of your deployed frontend
+}));
+
 //Settings
 app.set("port", 4000);
 
