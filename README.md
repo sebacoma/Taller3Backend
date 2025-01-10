@@ -43,7 +43,14 @@ Asegúrate de tener instalados los siguientes programas antes de comenzar:
 	DB_PASSWORD=your-database-password
 	DB_NAME=your-database-name
 
-4. Inicia el servidor localmente:
+4. probar conexion con base de datos
+
+	sequelize db:create
+	sequelize db: migrate
+	sequelize db:sedd:all
+
+
+5. Inicia el servidor localmente:
 	npm start
 
 ## Uso con Docker
